@@ -31,7 +31,7 @@ def chenillard(delai=0.3):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup([LED_ROUGE, LED_VERTE, LED_JAUNE], GPIO.OUT)
 
-        
+    while True:
     # Allumer LED 1, attendre, éteindre LED 1
         GPIO.output(LED_ROUGE, GPIO.HIGH)
         time.sleep(1)

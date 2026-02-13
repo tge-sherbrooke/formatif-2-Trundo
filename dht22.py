@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.13"
+# dependencies = [
+#     "adafruit-blinka>=8.69.0",
+#     "adafruit-circuitpython-dht>=4.0.10",
+#     "rpi-gpio>=0.7.1",
+# ]
+# ///
 """
 Lecture du capteur de température et d'humidité DHT22.
 
@@ -21,7 +29,21 @@ import adafruit_dht
 # Le DHT22 et DHT11 utilisent le même pilote
 DHT_PIN = board.D4  # GPIO 4 (Broche 7 sur le connecteur)
 DHT_SENSOR = adafruit_dht.DHT22
+dht = adafruit_dht.DHT22(DHT_PIN)
 
+
+while True:
+    try:
+        temperature = dht.temperature
+        humidite = dht.humidity
+        
+        print(f"Température: {temperature:.1f} °C")
+        print(f"Humidité: {humidite:.1f} %RH")
+        
+        time.sleep(2)  # Minimum 2 secondes entre les lectures
+    except RuntimeError as e:
+        print(f"Erreur de lecture: {e}")
+        time.sleep(2)
 def lire_temperature():
     """
     Lit la température en degrés Celsius.
